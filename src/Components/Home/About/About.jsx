@@ -27,7 +27,7 @@ const About = () => {
             believable.
           </p>
           <button className="btn btn-outline btn-error text-white">
-            Discover More
+           Get More Info
           </button>
         </div>
       </div>
