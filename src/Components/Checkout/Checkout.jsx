@@ -4,7 +4,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const Checkout = () => {
   const service = useLoaderData();
-  const { _id,title, price } = service;
+  const { _id, title, price, img } = service;
   const { user } = useContext(AuthContext);
   console.log("user", user);
   console.log("service", service);
@@ -21,9 +21,20 @@ const Checkout = () => {
       service: title,
       service_id: _id,
       price: price,
+      img,
     };
 
-    console.log("booking",booking);
+    fetch("http://localhost:5000/bookings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          alert("Your booking is successful");
+        }
+      });
   };
   return (
     <div>
@@ -40,13 +51,19 @@ const Checkout = () => {
                 defaultValue={user?.displayName}
                 name="name"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Date</span>
               </label>
-              <input type="date" name="date" className="input input-bordered" />
+              <input
+                type="date"
+                name="date"
+                className="input input-bordered"
+                required
+              />
             </div>
             <div className="form-control">
               <label className="label">
@@ -58,6 +75,7 @@ const Checkout = () => {
                 defaultValue={user?.email}
                 placeholder="email"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">
@@ -68,6 +86,7 @@ const Checkout = () => {
                 type="text"
                 defaultValue={"$" + price}
                 className="input input-bordered"
+                required
               />
             </div>
           </div>
@@ -76,6 +95,7 @@ const Checkout = () => {
               className="btn btn-primary btn-block"
               type="submit"
               value="Order Confirm"
+              required
             />
           </div>
         </form>
@@ -84,6 +104,7 @@ const Checkout = () => {
     </div>
   );
 };
+
 
 export default Checkout;
 
