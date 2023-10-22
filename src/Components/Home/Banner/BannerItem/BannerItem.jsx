@@ -1,6 +1,5 @@
 
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 const BannerItem = ({ id, image, prevSlide, nextSlide }) => {
   return (
@@ -41,11 +40,5 @@ const BannerItem = ({ id, image, prevSlide, nextSlide }) => {
   );
 };
 
-BannerItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  prevSlide: PropTypes.string.isRequired,
-  nextSlide: PropTypes.string.isRequired,
-};
 
 export default BannerItem;

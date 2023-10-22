@@ -11,7 +11,7 @@ const Services = () => {
         .then(res=>setServices(res))
     }, [])
     
-    console.log(services)
+    // console.log(services)
 
   return (
     <div className="my-10 ">
