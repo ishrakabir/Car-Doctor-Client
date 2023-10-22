@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
+
 const ServiceCard = ({ service }) => {
-  const { title, price, img } = service;
+  const { _id, title, price, img } = service;
 
   return (
     <div className="card md:w-80 lg:w-96 glass flex mx-auto gap-4">
@@ -10,15 +12,15 @@ const ServiceCard = ({ service }) => {
         <h2 className="card-title">{title}</h2>
         <p className="font-bold text-lg text-red-400">Price : ${price}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-outline btn-error text-white">
-            Buy Now
-          </button>
+          <Link to={`/services/${_id}`}>
+            <button className="btn btn-outline btn-error text-white">
+              Buy Now
+            </button>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
-
-
 
 export default ServiceCard;
