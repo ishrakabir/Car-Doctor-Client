@@ -13,6 +13,7 @@ const Bookings = () => {
   }, []);
 
     const handleDelete = (id) => {
+        
         const proceed = confirm('Are you sure you want to Delete ?');
         if (proceed) {
             fetch(`http://localhost:5000/bookings/${id}`, {
