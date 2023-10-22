@@ -4,7 +4,8 @@ import Home from "../Components/Home/Home/Home";
 import Login from "../Components/Login/Login";
 import SignUp from "../Components/SignUp/SignUp";
 import Checkout from "../Components/Checkout/Checkout";
-import Services from "../Components/Home/Services/Services";
+import Bookings from "../Components/Bookings/Bookings";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -24,8 +25,12 @@ const router = createBrowserRouter([
         element: <SignUp></SignUp>,
       },
       {
-        path: "/services",
-        element: <Services></Services>
+        path: "/bookings",
+        element: (
+          <PrivateRoute>
+            <Bookings></Bookings>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/services/:id",
