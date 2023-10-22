@@ -1,12 +1,30 @@
+import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Checkout = () => {
-    const service = useLoaderData();
-    const { title, price } = service;
-    console.log("service", service);
-    const handleBookService = (e) => {
-        e.preventDefault
-    }
+  const service = useLoaderData();
+  const { _id,title, price } = service;
+  const { user } = useContext(AuthContext);
+  console.log("user", user);
+  console.log("service", service);
+  const handleBookService = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const date = form.date.value;
+    const email = user?.email;
+    const booking = {
+      customerName: name,
+      email,
+      date,
+      service: title,
+      service_id: _id,
+      price: price,
+    };
+
+    console.log("booking",booking);
+  };
   return (
     <div>
       <div>
@@ -19,7 +37,7 @@ const Checkout = () => {
               </label>
               <input
                 type="text"
-                // defaultValue={user?.displayName}
+                defaultValue={user?.displayName}
                 name="name"
                 className="input input-bordered"
               />
@@ -37,7 +55,7 @@ const Checkout = () => {
               <input
                 type="text"
                 name="email"
-                // defaultValue={user?.email}
+                defaultValue={user?.email}
                 placeholder="email"
                 className="input input-bordered"
               />
@@ -68,3 +86,5 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
+
