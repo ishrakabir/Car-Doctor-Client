@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const BannerItem = ({ id, image, prevSlide, nextSlide }) => {
   return (
     <div id={`slide${id}`} className="carousel-item relative w-full h-full">
-      <img src={image} className="w-full rounded-xl" />
+      <img src={image} className="w-full rounded-xl object-cover" />
       <div className="absolute rounded-xl w-full h-full flex flex-col text-white justify-center space-y-4 pl-14  bg-gradient-to-r from-[#151515] to-[rgba(21.25, 21.25, 21.25, 0)]   ">
         <div className="lg:w-1/2 space-y-5">
           <h1 className=" text-xl lg:text-5xl font-bold  lg:w-1/2">
