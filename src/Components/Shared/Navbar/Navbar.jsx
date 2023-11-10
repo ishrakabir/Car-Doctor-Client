@@ -1,20 +1,30 @@
 import { Link } from "react-router-dom";
-import logo from '../../../../public/assets/logo.svg'
+import logo from '/assets/logo.svg'
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useContext } from "react";
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, loading } = useContext(AuthContext);
 
   const handleLogOut = () => {
     logOut()
       .then(() => {
         // Sign-out successful.
+          localStorage.removeItem('access-token');
       })
       .catch((error) => {
         console.log(error);
         // An error happened.
       });
   };
+
+  // Determine whether the user is authenticated or not
+  const isAuthenticated = user?.email;
+
+  // If the authentication information is still loading, don't render anything
+  // if (loading) {
+  //   return null;
+  // }
+
   const navItems = (
     <>
       <li>
@@ -23,7 +33,7 @@ const Navbar = () => {
       <li>
         <Link to="/">About</Link>
       </li>
-      {user?.email ? (
+      {isAuthenticated || loading ? (
         <>
           <li>
             <Link to="/bookings">My Bookings</Link>
@@ -67,7 +77,7 @@ const Navbar = () => {
               {navItems}
             </ul>
           </div>
-          <Link className="btn btn-ghost normal-case text-xl">
+          <Link className="btn btn-ghost normal-case text-xl h-full ">
             <img src={logo}></img>
           </Link>
         </div>

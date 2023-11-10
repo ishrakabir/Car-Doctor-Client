@@ -1,7 +1,7 @@
-import img1 from "../../../../public/assets/images/banner/1.jpg";
-import img2 from "../../../../public/assets/images/banner/2.jpg";
-import img3 from "../../../../public/assets/images/banner/3.jpg";
-import img4 from "../../../../public/assets/images/banner/4.jpg";
+import img2 from "/assets/images/banner/2.jpg";
+import img3 from "/assets/images/banner/3.jpg";
+import img1 from "/assets/images/banner/1.jpg";
+import img4 from "/assets/images/banner/4.jpg";
 import BannerItem from "./BannerItem/BannerItem";
 
 const Banner = () => {

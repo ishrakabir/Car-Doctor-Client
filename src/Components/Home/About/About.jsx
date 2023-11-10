@@ -4,11 +4,11 @@ const About = () => {
       <div className="hero-content flex-col lg:flex-row">
         <div className="relative mb-10 md:mb-0">
           <img
-            src="../../../../public/assets/images/about_us/person.jpg"
+            src="/assets/images/about_us/person.jpg"
             className="w-3/4 rounded-lg"
           ></img>
           <img
-            src="../../../../public/assets/images/about_us/parts.jpg"
+            src="/assets/images/about_us/parts.jpg"
             className="w-1/2 absolute right-5 top-1/2 rounded-lg border-white border-8"
           ></img>
         </div>
