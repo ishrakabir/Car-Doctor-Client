@@ -1,9 +1,25 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin/socialLogin";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser,user } = useContext(AuthContext);
+  const location = useLocation();
+
+  // Get the navigate function from useNavigate hook
+  const navigate = useNavigate();
+
+  // Extract the 'from' path from the location state, defaulting to "/" if not present
+  const from = location.state?.from?.pathname || "/";
+  console.log("from", from);
+ useEffect(() => {
+    // Use useEffect to handle the navigation after the component has rendered
+    if (user?.email) {
+      navigate(from, { replace: true });
+    }
+  }, [user, from, navigate]);
+
   const handleSignup = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -77,6 +93,7 @@ const SignUp = () => {
                 </Link>
               </div>
             </form>
+             <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

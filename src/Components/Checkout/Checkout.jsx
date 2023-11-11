@@ -24,7 +24,7 @@ const Checkout = () => {
       img,
     };
 
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://car-doctor-server-sepia-two.vercel.app/bookings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(booking),

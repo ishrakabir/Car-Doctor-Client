@@ -7,7 +7,7 @@ const Bookings = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   const navigate = useNavigate();
-  const url = `http://localhost:5000/bookings?email=${user?.email}`;
+  const url = `https://car-doctor-server-sepia-two.vercel.app/bookings?email=${user?.email}`;
   useEffect(() => {
     fetch(url, {
       method: 'GET',
@@ -29,7 +29,7 @@ const Bookings = () => {
   const handleDelete = (id) => {
     const proceed = confirm("Are you sure you want to Delete ?");
     if (proceed) {
-      fetch(`http://localhost:5000/bookings/${id}`, {
+      fetch(`https://car-doctor-server-sepia-two.vercel.app/bookings/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -45,7 +45,7 @@ const Bookings = () => {
   };
 
   const handleConfirmation = (id) => {
-    fetch(`http://localhost:5000/bookings/${id}`, {
+    fetch(`https://car-doctor-server-sepia-two.vercel.app/bookings/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: "confirm" }),

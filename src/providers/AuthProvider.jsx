@@ -1,9 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import {
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import { app } from "../../firebase.config";
@@ -21,6 +23,8 @@ const AuthProvider = ({ children }) => {
 
   // State to track loading state during authentication operations
   const [loading, setLoading] = useState(true);
+
+  const provider = new GoogleAuthProvider();
   
   // Function to create a new user account
   const createUser = (email, password) => {
@@ -40,6 +44,10 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   }
 
+  const googleSign = () => {
+    setLoading(true);
+    return signInWithPopup(auth, provider);
+  }
   // useEffect to listen for changes in authentication state
   useEffect(() => {
     // Subscribe to onAuthStateChanged event
@@ -47,8 +55,32 @@ const AuthProvider = ({ children }) => {
       // Update user state when authentication state changes
       setUser(currentUser);
       console.log("currentUser", currentUser);
+     
       // Set loading to false once authentication state is determined
       setLoading(false);
+      if (currentUser && currentUser.email) {
+          const loggedUser = {
+          email: currentUser.email,
+        };
+        fetch("https://car-doctor-server-sepia-two.vercel.app/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("jwt response", data);
+            localStorage.setItem('access-token', data.token);
+            // Navigate to the 'from' path after successful login
+          
+          });
+      }
+      else
+      {
+        localStorage.removeItem('access-token');
+        }
     });
     
 
@@ -64,6 +96,7 @@ const AuthProvider = ({ children }) => {
     loading,
     createUser,
     signIn,
+    googleSign,
     logOut,
   };
 

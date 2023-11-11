@@ -19,7 +19,7 @@ const Navbar = () => {
 
   // Determine whether the user is authenticated or not
   const isAuthenticated = user?.email;
-
+  console.log(isAuthenticated);
   // If the authentication information is still loading, don't render anything
   // if (loading) {
   //   return null;
@@ -33,7 +33,12 @@ const Navbar = () => {
       <li>
         <Link to="/">About</Link>
       </li>
-      {isAuthenticated || loading ? (
+      { !isAuthenticated && loading ? (
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+      ) : 
+        isAuthenticated && !loading ? (
         <>
           <li>
             <Link to="/bookings">My Bookings</Link>
